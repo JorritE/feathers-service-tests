@@ -522,6 +522,13 @@ function common (app, errors, serviceName = 'people', idProp = 'id') {
 
 
       it('returns NotFound error when trying to update with a query', () => {
+
+        const originalData = {
+          [idProp]: _ids.Doug,
+          name: 'Dougler',
+          age: 10
+        };
+
         const params = {
           query: {
             age: 10
