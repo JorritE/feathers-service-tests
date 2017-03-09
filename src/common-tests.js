@@ -519,7 +519,24 @@ function common (app, errors, serviceName = 'people', idProp = 'id') {
             expect(error.message).to.equal('No record found for id \'568225fbfe21222432e836ff\'');
           });
       });
-    });
+
+
+      it('returns NotFound error when trying to update with a query', () => {
+        const params = {
+          query: {
+            age: 10
+          }
+        };
+
+        return app.service(serviceName)
+          .update(_ids.Doug, originalData, params)
+          .catch(error => {
+            expect(error).to.be.ok;
+            expect(error instanceof errors.NotFound).to.be.ok;
+            expect(error.message).to.equal('No record found for id \'568225fbfe21222432e836ff\'');
+          });
+        });
+      });
 
     describe('patch', () => {
       it('updates an existing instance, does not modify original data', () => {
